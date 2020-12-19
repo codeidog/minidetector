@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+    db:
+        build: 
+            context: ./DB
+            dockerfile: ./Dockerfile
+        image: 'detectordb:1'
+        environment:
+            - DB_NAME=minidetector
+            - DB_USER=detector
+            - DB_PWD=passw123
+    minidetector:
+        build:
+            context: ./minidetector
+            dockerfile: Dockerfile
+        image: 'minidetector:1'
+        environment: 
+            - DB_SEVER=db
+            - DB_NAME=minidetector
+            - DB_USER=detector
+            - DB_PWD=passw123
+        depends_on:
+            - db
+        command: '--debug'
+
+        
