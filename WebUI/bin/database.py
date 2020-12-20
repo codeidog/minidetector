@@ -7,6 +7,7 @@ db_user = os.environ['DB_USER']
 db_pwd = os.environ['DB_PWD']
 constr = f'dbname={db_name} user={db_user} host={db_server} password={db_pwd}'
 
+
 def select_all():
     query = "SELECT mac, ip FROM entity"    
     with psycopg2.connect(constr) as conn:

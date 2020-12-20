@@ -2,6 +2,7 @@ import flask
 from database import select_all, get_routers
 from flask import Flask, render_template
 import os
+import sys
 
 app = Flask(__name__)
 
@@ -22,6 +23,8 @@ def lastseen():
 
 
 if (__name__ == '__main__'):        
-    port = os.environ['PORT']
+    port = 8080
+    if(len(sys.argv) > 1):
+        port = sys.argv[1]
     app.run(port=port, host="0.0.0.0")
     
