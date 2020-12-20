@@ -23,6 +23,7 @@ services:
             - DB_PWD=passw123
         depends_on:
             - db
+        command: '--debug'
     
     ui:
         build:

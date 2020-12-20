@@ -31,3 +31,15 @@ def get_routers():
       "Columns" : colnames,
       "Rows": rows
     }
+
+def last_seen():
+  query = "SELECT mac, ip, last_seen FROM entity ORDER BY last_seen DESC"    
+  with psycopg2.connect(constr) as conn:
+    cursor = conn.cursor()      
+    cursor.execute(query)
+    colnames = [desc[0] for desc in cursor.description]
+    rows = cursor.fetchall()      
+  return {
+    "Columns" : colnames,
+    "Rows": rows
+  }

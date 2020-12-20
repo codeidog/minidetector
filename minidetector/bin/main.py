@@ -4,7 +4,7 @@ import threading
 import logging
 
 from scapy.all import sniff, Ether, IP
-from database import create_tables, Entity, create_session, drop_tables
+from database import create_tables, Entity, create_session, drop_tables, _get_date
 from queue import Queue
 
 packet_queue = Queue()
@@ -26,9 +26,9 @@ def process_data():
         ip = packet[IP].src
         session = create_session()        
         query = session.query(Entity).filter_by(mac=mac, ip=ip)
-        if query.count() > 0:
-            logging.debug(f'skipping packet {ip} {mac}')
-            session.close()
+        if query.count() > 0:            
+            logging.debug(f'skipping packet {ip} {mac}')                                
+            session.close()            
             continue
         entity = Entity(mac=mac, ip=ip)
         session.add(entity)

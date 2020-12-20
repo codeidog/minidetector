@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.declarative import declarative_base
 import os
@@ -10,6 +10,7 @@ db_name = os.environ['DB_NAME']
 db_user = os.environ['DB_USER']
 db_pwd = os.environ['DB_PWD']
 db_string = f'postgresql://{db_user}:{db_pwd}@{db_server}/{db_name}'
+
 
 engine = create_engine(db_string)
 Base = declarative_base()
@@ -25,6 +26,7 @@ def drop_tables():
 
 def create_session():
     return Session(bind=engine)
+    
 
 def _get_date():
     return datetime.datetime.now()
@@ -34,7 +36,7 @@ class Entity(Base):
     id = Column(Integer, primary_key=True)
     mac = Column(String)
     ip = Column(String)
-    last_seen = Column(Date, default=_get_date)
+    last_seen = Column(DateTime, default=_get_date )
     #test = Column(String)#
 
     def __repr__(self):

@@ -1,5 +1,5 @@
 import flask
-from database import select_all, get_routers
+from database import select_all, get_routers, last_seen
 from flask import Flask, render_template
 import os
 import sys
@@ -19,7 +19,9 @@ def routers():
 
 @app.route("/lastseen", methods=['get'])
 def lastseen():    
-    pass
+    table = last_seen()
+    return render_template("table.html", headings= table['Columns'], data=table['Rows'], title='Last Seen')
+
 
 
 if (__name__ == '__main__'):        
