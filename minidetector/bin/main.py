@@ -24,11 +24,14 @@ def process_data():
             logging.info(f'Queue size: {packet_queue.qsize()}')
         mac = packet[Ether].src
         ip = packet[IP].src
-        session = create_session()        
+        session = create_session()
         query = session.query(Entity).filter_by(mac=mac, ip=ip)
         if query.count() > 0:            
-            logging.debug(f'skipping packet {ip} {mac}')                                
-            session.close()            
+            logging.debug(f'updating packet {ip} {mac}')
+            date = _get_date()
+            query.update({'last_seen':date}, synchronize_session = False)
+            session.commit()
+            session.close()
             continue
         entity = Entity(mac=mac, ip=ip)
         session.add(entity)
