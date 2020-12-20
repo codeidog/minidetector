@@ -14,4 +14,5 @@ RUN pip3 install -r requirements.txt
 #Copy binaries
 COPY bin /opt/webui
 EXPOSE 8080
-ENTRYPOINT [ "python3", "main.py" ]
+#ENTRYPOINT [ "python3", "main.py" ]
+ENTRYPOINT gunicorn --bind "0.0.0.0:$PORT" --access-logfile - wsgi:app

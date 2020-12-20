@@ -8,11 +8,9 @@ db_pwd = os.environ['DB_PWD']
 constr = f'dbname={db_name} user={db_user} host={db_server} password={db_pwd}'
 
 def select_all():
-    query = "SELECT * FROM entity"
-    logging.debug('Connecting to the database')
+    query = "SELECT * FROM entity"    
     with psycopg2.connect(constr) as conn:
-      cursor = conn.cursor()
-      logging.debug(f'Executing query {query}')
+      cursor = conn.cursor()      
       cursor.execute(query)
       colnames = [desc[0] for desc in cursor.description]
       rows = cursor.fetchall()      
@@ -22,11 +20,9 @@ def select_all():
     }
 
 def get_routers():
-    query = "SELECT mac FROM entity GROUP BY mac HAVING COUNT(mac) >3"
-    logging.debug('Connecting to the database')
+    query = "SELECT mac FROM entity GROUP BY mac HAVING COUNT(mac) >3"    
     with psycopg2.connect(constr) as conn:
-      cursor = conn.cursor()
-      logging.debug(f'Executing query {query}')
+      cursor = conn.cursor()      
       cursor.execute(query)
       colnames = [desc[0] for desc in cursor.description]
       rows = cursor.fetchall()      

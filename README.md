@@ -31,3 +31,15 @@ INFO:root:Added entity <Entity id=11 MAC=9c:30:5b:25:1b:d5 IP=10.0.0.2>
 INFO:root:Added entity <Entity id=12 MAC=00:b8:c2:26:9d:bc IP=143.204.194.95>
 ```
 You may use the `--help` flag to see all available flags.
+
+
+## Run with Docker-Compose
+
+Run the following command to build and run the stack:  
+```bash
+docker-compose up
+```
+### Web UI
+The UI has 2 endpoints:
+
+**/all**  
