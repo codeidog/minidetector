@@ -1,4 +1,7 @@
 .idea
+.vscode
 *.egg-info
 venv
 **/*.pyc
+.vscode
+*.egg

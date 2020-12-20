@@ -8,9 +8,9 @@ db_server = os.environ['DB_SERVER']
 db_name = os.environ['DB_NAME']
 db_user = os.environ['DB_USER']
 db_pwd = os.environ['DB_PWD']
-db_string = "postgresql://{}:{}@{}/{}".format(db_user, db_pwd, db_server, db_name)
+db_string = f'postgresql://{db_user}:{db_pwd}@{db_server}/{db_name}'
 
-engine = create_engine(db_string, pool_size=0, max_overflow=20)
+engine = create_engine(db_string)
 Base = declarative_base()
 
 

@@ -9,6 +9,8 @@ services:
             - DB_NAME=minidetector
             - DB_USER=detector
             - DB_PWD=passw123
+        ports: 
+            - 5432:5432
     minidetector:
         build:
             context: ./minidetector
@@ -21,6 +23,20 @@ services:
             - DB_PWD=passw123
         depends_on:
             - db
-        command: '--debug'
+    
+    ui:
+        build:
+            context: ./WebUI
+            dockerfile: Dockerfile
+        image: 'detectorui:1'
+        environment:
+            - DB_SEVER=db
+            - DB_NAME=minidetector
+            - DB_USER=detector
+            - DB_PWD=passw123
+        depends_on:
+            - db
+        ports: 
+            - 80:8080
 
         
