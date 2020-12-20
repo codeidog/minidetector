@@ -42,4 +42,5 @@ docker-compose up
 ### Web UI
 The UI has 2 endpoints:
 
-**/all**  
+**/all**  - displays all the network entities (mac+IP couples) in the database.  
+**/routers** - displays mac addresses that belong to more than 3 IP addresses.
