@@ -43,4 +43,5 @@ docker-compose up
 The UI has 2 endpoints:
 
 **/all**  - displays all the network entities (mac+IP couples) in the database.  
-**/routers** - displays mac addresses that belong to more than 3 IP addresses.
+**/routers** - displays mac addresses that belong to more than 3 IP addresses.  
+**/lastseen** - displays all the entities with their “last seen” time, sorted from the one that was seen most recently to the oldest one.
