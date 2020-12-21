@@ -1,8 +1,8 @@
 FROM python:3.9.1
-#ENV DB_SERVER=
-#ENV DB_NAME=
-#ENV DB_USER=
-#ENV DB_PWD=
+ENV DB_SERVER=
+ENV DB_NAME=
+ENV DB_USER=
+ENV DB_PWD=
 ENV PORT=8080
 
 #Copy and install dependencies
