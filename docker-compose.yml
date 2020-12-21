@@ -4,7 +4,8 @@ services:
         build: 
             context: ./DB
             dockerfile: ./Dockerfile
-        image: 'detectordb:1'        
+        image: 'detectordb:1'
+        env_file: 'minidetector.env'
         ports: 
             - 5432:5432
     minidetector:
@@ -12,8 +13,9 @@ services:
             context: ./minidetector
             dockerfile: Dockerfile
         image: 'minidetector:1'
+        env_file: 'minidetector.env'
         environment: 
-            - DB_SEVER=db            
+            - DB_SERVER=db
         depends_on:
             - db
         command: '--debug'
@@ -23,8 +25,9 @@ services:
             context: ./WebUI
             dockerfile: Dockerfile
         image: 'detectorui:1'
+        env_file: 'minidetector.env'
         environment:
-            - DB_SEVER=db            
+            - DB_SERVER=db            
         depends_on:
             - db
         ports: 

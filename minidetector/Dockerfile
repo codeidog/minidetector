@@ -1,13 +1,12 @@
 FROM python:3.9.1
-ENV DB_SERVER=db
-ENV DB_NAME=minidetector
-ENV DB_USER=detector
-ENV DB_PWD=passw123
+ENV DB_SERVER=
+ENV DB_NAME=
+ENV DB_USER=
+ENV DB_PWD=
 
 #Copy and install dependencies
 RUN mkdir /opt/minidetctor
 COPY bin/setup.py /opt/minidetctor
-COPY bin/README.md /opt/minidetctor
 WORKDIR /opt/minidetctor
 RUN python3 /opt/minidetctor/setup.py install
 
