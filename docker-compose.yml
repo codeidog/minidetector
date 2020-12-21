@@ -4,11 +4,7 @@ services:
         build: 
             context: ./DB
             dockerfile: ./Dockerfile
-        image: 'detectordb:1'
-        environment:
-            - DB_NAME=minidetector
-            - DB_USER=detector
-            - DB_PWD=passw123
+        image: 'detectordb:1'        
         ports: 
             - 5432:5432
     minidetector:
@@ -17,10 +13,7 @@ services:
             dockerfile: Dockerfile
         image: 'minidetector:1'
         environment: 
-            - DB_SEVER=db
-            - DB_NAME=minidetector
-            - DB_USER=detector
-            - DB_PWD=passw123
+            - DB_SEVER=db            
         depends_on:
             - db
         command: '--debug'
@@ -31,10 +24,7 @@ services:
             dockerfile: Dockerfile
         image: 'detectorui:1'
         environment:
-            - DB_SEVER=db
-            - DB_NAME=minidetector
-            - DB_USER=detector
-            - DB_PWD=passw123
+            - DB_SEVER=db            
         depends_on:
             - db
         ports: 
