@@ -40,9 +40,4 @@ class Entity(Base):
     #test = Column(String)#
 
     def __repr__(self):
-        return f'<{self.__class__.__name__} id={self.id} MAC={self.mac} IP={self.ip}>'
-
-    def get_date():
-        return datetime.datetime.now()
-
-    
+        return f'<{self.__class__.__name__} id={self.id} MAC={self.mac} IP={self.ip}>'        
