@@ -20,7 +20,7 @@ services:
             - DB_SERVER=localhost
         depends_on:
             - db
-        command: '--debug'
+        #command: '--debug'
         network_mode: host        
     
     ui:
@@ -34,5 +34,5 @@ services:
         depends_on:
             - db
         ports: 
-            - 80:8080
+            - 90:8080
         command: "--debug"

@@ -1,45 +1,42 @@
-import psycopg2
-import logging
+from sqlalchemy import create_engine
+from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy.orm import Session
+from sqlalchemy.ext.declarative import declarative_base
 import os
+import datetime
+
 db_server = os.environ['DB_SERVER']
 db_name = os.environ['DB_NAME']
 db_user = os.environ['DB_USER']
 db_pwd = os.environ['DB_PWD']
-constr = f'dbname={db_name} user={db_user} host={db_server} password={db_pwd}'
+db_string = f'postgresql://{db_user}:{db_pwd}@{db_server}/{db_name}'
 
 
-def select_all():
-    query = "SELECT mac, ip FROM entity"    
-    with psycopg2.connect(constr) as conn:
-      cursor = conn.cursor()      
-      cursor.execute(query)
-      colnames = [desc[0] for desc in cursor.description]
-      rows = cursor.fetchall()      
-    return {
-      "Columns" : colnames,
-      "Rows": rows
-    }
+engine = create_engine(db_string)
+Base = declarative_base()
 
-def get_routers():
-    query = "SELECT mac FROM entity GROUP BY mac HAVING COUNT(mac) >3"    
-    with psycopg2.connect(constr) as conn:
-      cursor = conn.cursor()      
-      cursor.execute(query)
-      colnames = [desc[0] for desc in cursor.description]
-      rows = cursor.fetchall()      
-    return {
-      "Columns" : colnames,
-      "Rows": rows
-    }
 
-def last_seen():
-  query = "SELECT mac, ip, last_seen FROM entity ORDER BY last_seen DESC"    
-  with psycopg2.connect(constr) as conn:
-    cursor = conn.cursor()      
-    cursor.execute(query)
-    colnames = [desc[0] for desc in cursor.description]
-    rows = cursor.fetchall()      
-  return {
-    "Columns" : colnames,
-    "Rows": rows
-  }
+def create_tables():
+    Base.metadata.create_all(engine)
+
+
+def drop_tables():
+    Base.metadata.drop_all(engine)
+
+
+def create_session():
+    return Session(bind=engine)
+    
+
+def _get_date():
+    return datetime.datetime.now()
+
+class Entity(Base):
+    __tablename__ = 'entity'
+    id = Column(Integer, primary_key=True)
+    mac = Column(String)
+    ip = Column(String)
+    last_seen = Column(DateTime, default=_get_date )    
+
+    def __repr__(self):
+        return [self.id,self.mac,self.ip,self.last_seen]    
