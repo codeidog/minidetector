@@ -17,10 +17,11 @@ services:
         image: 'minidetector:1'
         env_file: 'minidetector.env'
         environment: 
-            - DB_SERVER=db
+            - DB_SERVER=localhost
         depends_on:
             - db
         command: '--debug'
+        network_mode: host        
     
     ui:
         build:
@@ -35,5 +36,3 @@ services:
         ports: 
             - 80:8080
         command: "--debug"
-
-        
