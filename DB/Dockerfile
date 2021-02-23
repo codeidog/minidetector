@@ -1,4 +1,4 @@
-FROM postgres:13
+FROM postgres:13.2-alpine
 ENV DB_NAME=
 ENV DB_USER=
 ENV DB_PWD=
