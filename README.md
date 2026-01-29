@@ -1,5 +1,5 @@
 # Mini Detector
-### A small network assets detector example
+### A very small network assets detector example
 
 The mini detector sniff network packets (using scapy) and store all the mac-ip couples into a table in a postgres database.
 
